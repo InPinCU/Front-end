@@ -5,9 +5,6 @@ First install node and npm
 Then run 
 ```
 npm install
-```
-Then run 
-```
 npm run start
 ```
 To build the application run 
