@@ -1,2 +1,27 @@
 
-    <google-map></google-map>
+      <button mat-icon-button>
+        <mat-icon (click)="reduceWidth()">menu</mat-icon>
+      </button>
+<google-map height={{height}} width={{width}} [center]="center"
+(mapClick)="addMarkerToPoint($event)">
+<map-marker
+  *ngFor="let marker of markers"
+  [position]="marker.position"
+  [label]="marker.label"
+  [title]="marker.title"
+  [options]="marker.options"
+  
+  (mapClick)="openInfo(marker)"
+
+>
+</map-marker>
+
+<map-marker
+  *ngFor="let marker of centerMarkers"
+  [position]="marker.position"
+  [label]="marker.label"
+  [title]="marker.title"
+  [options]="marker.options"
+>
+</map-marker>
+</google-map>

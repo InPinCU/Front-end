@@ -11,7 +11,7 @@ To build the application run
 ```
 npm run build 
 ```
-and look into the /build folder that gets generated
+and look into the /dist folder that gets generated
 
 
 
