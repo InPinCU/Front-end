@@ -1,10 +1,20 @@
 # TrendMap
 
-First install node and npm \n
-Then run npm install
-Then run npm run start
+First install node and npm
 
-To build the application run npm run build and look into the /build folder that gets generated
+Then run 
+```
+npm install
+```
+Then run 
+```
+npm run start
+```
+To build the application run 
+```
+npm run build 
+```
+and look into the /build folder that gets generated
 
 
 
