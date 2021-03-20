@@ -1,5 +1,23 @@
 # TrendMap
 
+First install node and npm
+Then run npm install
+Then run npm run start
+
+To build the application run npm run build and look into the /build folder that gets generated
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
 
 ## Development server
