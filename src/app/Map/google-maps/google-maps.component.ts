@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Input,Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-google-maps',
@@ -9,53 +10,31 @@ import { catchError, map } from 'rxjs/operators';
   styleUrls: ['./google-maps.component.scss']
 })
 export class GoogleMapsComponent implements OnInit {
- 
+  
+  @ViewChild('googlemaps') map!: any;
   width = "100%"
   height = "100vh"
-  isInfoWindowOpen = false;
+  isInfoWindowOpen:boolean = false;
 
+  @Output() centerChangedEvent = new EventEmitter<any>();
+  @Output() infoWindowOpened = new EventEmitter<boolean>();
+  
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
   centerMarkers:any[] = []
   markers:any[] = []
 
-  center: google.maps.LatLngLiteral= {lat:0,lng:0.5};
+  @Input()
+  center!: google.maps.LatLngLiteral;
+  
   options: google.maps.MapOptions = {
-    mapTypeId: 'hybrid',
-    zoomControl: false,
-    scrollwheel: false,
-    disableDoubleClickZoom: true,
-    maxZoom: 15,
-    minZoom: 8,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+    fullscreenControl: false
   };
 
-  openInfo(markerInfo:any){
-    console.log(markerInfo)
-    if(!this.isInfoWindowOpen){
-      this.width = "70%";
-      this.isInfoWindowOpen = true;
-    }
-    else{
-      this.width = "100%"
-      this.isInfoWindowOpen = false;
-
-    }
-  }
-  addMarkerToPoint(event: google.maps.MapMouseEvent) {
-    
-    this.markerPositions.push(event.latLng.toJSON());
-
-    this.markers.push({
-      position: this.markerPositions[this.markerPositions.length - 1],
-      label: {
-        color: 'red',
-        text: 'Marker label ' + (this.markers.length + 1),
-      },
-      index:this.markers.length,
-      title: 'Marker title ' + (this.markers.length + 1),
-      options: { draggable: false},
-    })
-  }
   constructor(httpClient: HttpClient) {
     //this.center = {lat:0,lng:0.5};
   }
@@ -76,22 +55,30 @@ export class GoogleMapsComponent implements OnInit {
         title: 'Marker title ' + (this.markers.length + 1),
         options: { draggable: false },
       }]
-    })
+    })  
+  }
+  getCenter(event:any){
+    let a:google.maps.LatLng = this.map.getCenter();
+    this.centerChangedEvent.emit(a.toJSON());
+  }
 
-  }
-  reduceWidth(){
-    if(this.width == "100%")
-      this.width = "70%"
-    else
+
+  openInfo(markerInfo:any){
+    console.log(markerInfo)
+    if(!this.isInfoWindowOpen){
+      this.width = "70%";
+      this.isInfoWindowOpen = true;
+    }
+    else{
       this.width = "100%"
-    this.addMarker();
+      this.isInfoWindowOpen = false;
+
+    }
   }
-  addMarker() {
-    debugger;
-    this.markerPositions.push({
-      lat: this.center.lat + ((Math.random() - 0.5) * 2) / 10,
-      lng: this.center.lng + ((Math.random() - 0.5) * 2) / 10,
-    });
+  addMarkerToPoint(event: google.maps.MapMouseEvent) {
+    
+    this.markerPositions.push(event.latLng.toJSON());
+    console.log(this.center);
     this.markers.push({
       position: this.markerPositions[this.markerPositions.length - 1],
       label: {
@@ -100,7 +87,7 @@ export class GoogleMapsComponent implements OnInit {
       },
       index:this.markers.length,
       title: 'Marker title ' + (this.markers.length + 1),
-      options: { draggable: false },
+      options: { draggable: false},
     })
   }
 }

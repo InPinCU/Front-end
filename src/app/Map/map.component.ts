@@ -9,7 +9,10 @@ import { ApiCallerService } from '../services/api-caller.service';
 export class MapComponent implements OnInit {
 
   products = [];
+  showRedoSearchButton:boolean = false;
   
+  center: google.maps.LatLngLiteral={lat:0.5,lng:0.5};
+
   constructor(private APICaller:ApiCallerService) {
   }
 
@@ -17,7 +20,14 @@ export class MapComponent implements OnInit {
 
     this.APICaller.sendProductRequest().subscribe((data: [any])=>{
       console.log(data);
-    }) 
+    })
+  }
+  centerChangedEvent(event:any){
+    this.showRedoSearchButton = true;
+  }
+  redoSearch(){
+    this.showRedoSearchButton = false;
+
   }
 
 }

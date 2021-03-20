@@ -14,6 +14,8 @@ import { MatIconModule} from  '@angular/material/Icon';
 import { MatListModule} from  '@angular/material/list';
 import { MatButtonModule} from  '@angular/material/button';
 import { MatSidenavModule} from  '@angular/material/sidenav';
+import {  MatFormFieldModule} from  '@angular/material/form-field';
+import {  MatInputModule} from  '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsComponent } from './Map/google-maps/google-maps.component';
 
@@ -37,7 +39,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

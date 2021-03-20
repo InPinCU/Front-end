@@ -1,18 +1,17 @@
 
-      <button mat-icon-button>
-        <mat-icon (click)="reduceWidth()">menu</mat-icon>
-      </button>
+
 <google-map height={{height}} width={{width}} [center]="center"
-(mapClick)="addMarkerToPoint($event)">
+(mapClick)="addMarkerToPoint($event)" [options]="options" 
+(centerChanged)="getCenter($event)"
+#googlemaps class="map-container">
+
 <map-marker
   *ngFor="let marker of markers"
   [position]="marker.position"
   [label]="marker.label"
   [title]="marker.title"
   [options]="marker.options"
-  
   (mapClick)="openInfo(marker)"
-
 >
 </map-marker>
 
