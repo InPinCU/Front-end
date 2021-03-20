@@ -1,7 +1,18 @@
-<p>header works!</p>
-<nav>
-    <ul>
-      <li><a routerLink="/map" >First Component</a></li>
-      <li><a routerLink="/second-component" >Second Component</a></li>
-    </ul>
-  </nav>
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h1>TrendMap</h1>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/map'"> Home </a>
+        <a mat-button [routerLink]="'/favorites'"> Favorites </a>
+      </div>
+    </mat-toolbar-row>
+  
+    <mat-toolbar-row> 
+        <span style="font-size: 12px;">TrendMap allows you to see popular places around you</span>
+      </mat-toolbar-row>
+  </mat-toolbar>

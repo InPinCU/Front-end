@@ -1,6 +1,6 @@
 # TrendMap
 
-First install node and npm
+First install node and npm \n
 Then run npm install
 Then run npm run start
 

@@ -9,18 +9,35 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { MatToolbarModule} from  '@angular/material/toolbar';
+import { MatIconModule} from  '@angular/material/Icon';
+import { MatListModule} from  '@angular/material/list';
+import { MatButtonModule} from  '@angular/material/button';
+import { MatSidenavModule} from  '@angular/material/sidenav';
+import { HttpClientModule } from '@angular/common/http';
+import { GoogleMapsComponent } from './Map/google-maps/google-maps.component';
+
+import { GoogleMapsModule } from '@angular/google-maps';
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     FavoritesComponent,
     HeaderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    GoogleMapsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
