@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RESTService } from './rest.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry ,map } from 'rxjs/operators';
+import { AppConstants } from '../constants/RESTConstants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class ApiCallerService {
   constructor(private RESTCaller: RESTService) {
     
   }
-  public sendProductRequest(): Observable<[any]> {
-    return this.RESTCaller.sendGetRequest().pipe(map(d=>this.modify(d)));
+  public sendLocationRequest(lat:number , long:number): Observable<[any]> {
+    let finalURL:string = AppConstants.locationAPI+"?lat="+lat+"&long="+long
+    return this.RESTCaller.sendGetRequest(finalURL).pipe(map(d=>this.modify(d)));
   }
   
   modify(data:any){

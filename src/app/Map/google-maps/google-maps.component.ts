@@ -55,6 +55,9 @@ export class GoogleMapsComponent implements OnInit {
         title: 'Marker title ' + (this.markers.length + 1),
         options: { draggable: false },
       }]
+      
+
+
     })  
   }
   getCenter(event:any){
@@ -88,6 +91,7 @@ export class GoogleMapsComponent implements OnInit {
       index:this.markers.length,
       title: 'Marker title ' + (this.markers.length + 1),
       options: { draggable: false},
+      id:this.markers.length + 1
     })
   }
 }

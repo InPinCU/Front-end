@@ -11,7 +11,7 @@ export class RESTService {
   constructor(private httpClient: HttpClient) {
     
   }
-  public sendGetRequest(){
-    return this.httpClient.get(AppConstants.REST_API_SERVER+AppConstants.productAPI);
+  public sendGetRequest(url:String){
+    return this.httpClient.get(AppConstants.REST_API_SERVER+url);
   }
 }
