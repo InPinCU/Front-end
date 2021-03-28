@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallerService } from '../services/api-caller.service';
-
-import { GeneralConstants } from '../constants/generalConstants'
+import { GeneralConstants } from '../constants/generalConstants';
 
 @Component({
   selector: 'app-map',
@@ -14,6 +13,9 @@ export class MapComponent implements OnInit {
   showRedoSearchButton:boolean = false;
   currentLat:number=GeneralConstants.defaultLat;
   currentLong:number=GeneralConstants.defaultLong;
+  listOfResults:any;
+  isClicked:boolean=false;
+  clickedLocation?:String=undefined;
   
   center: google.maps.LatLngLiteral={lat:this.currentLat,lng:this.currentLong};
 
@@ -34,9 +36,16 @@ export class MapComponent implements OnInit {
   redoSearch(){
     this.showRedoSearchButton = false;
     
-    this.APICaller.sendLocationRequest(this.currentLat,this.currentLong).subscribe((data: [any])=>{
+    this.APICaller.sendLocationRequest(this.currentLat,this.currentLong).subscribe((data: any)=>{
       console.log(data);
+      this.listOfResults = data["results"];
     })
+  }
+
+  infoWindowOpened(marker:any){
+    console.log(marker);
+    this.isClicked = !this.isClicked;
+    this.clickedLocation = marker.id;
   }
 
 }

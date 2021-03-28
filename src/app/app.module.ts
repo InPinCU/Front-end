@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsComponent } from './Map/google-maps/google-maps.component';
 
 import { GoogleMapsModule } from '@angular/google-maps';
+import { DetailContainerComponent } from './Map/detail-container/detail-container.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     FavoritesComponent,
     HeaderComponent,
     PageNotFoundComponent,
-    GoogleMapsComponent
+    GoogleMapsComponent,
+    DetailContainerComponent
   ],
   imports: [
     BrowserModule,

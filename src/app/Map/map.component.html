@@ -9,7 +9,7 @@
   </div>
 
 </div> 
-<div> 
-    <app-google-maps [center]="center" (centerChangedEvent)="centerChangedEvent($event)" flex='100' class="map-view"></app-google-maps>
-
+<div class="container-view"> 
+    <app-google-maps [center]="center" [listOfResults] = "listOfResults" (centerChangedEvent)="centerChangedEvent($event)" (infoWindowOpened)="infoWindowOpened($event)" flex='70' class="map-view"></app-google-maps>
+    <app-detail-container [hidden]="!isClicked" class="detail-view" [placesAPIRef]="clickedLocation"></app-detail-container>
 </div>

@@ -14,7 +14,7 @@ export class ApiCallerService {
   constructor(private RESTCaller: RESTService) {
     
   }
-  public sendLocationRequest(lat:number , long:number): Observable<[any]> {
+  public sendLocationRequest(lat:number , long:number): Observable<any> {
     let finalURL:string = AppConstants.locationAPI+"?lat="+lat+"&long="+long
     return this.RESTCaller.sendGetRequest(finalURL).pipe(map(d=>this.modify(d)));
   }

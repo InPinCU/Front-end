@@ -1,6 +1,12 @@
 .map-view{
     height:70vh;
-    width:100vw;
+    flex:70;
+}
+.detail-view{
+    flex:30;
+}
+.container-view{
+    display:flex;
 }
 .search-container{
     padding:10px;
