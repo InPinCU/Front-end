@@ -50,12 +50,13 @@ export class GoogleMapsComponent implements OnInit {
       this.updateMarkers();
     }
   }
+  
   updateMarkers(){
     this.setupcenterMarker();
     this.markers=[];
     for (let row of this.listOfResults){
-      console.log(row);
-      console.log(this.listOfResults);
+      
+      
       
       let curentPosition:google.maps.LatLngLiteral= {
         lat: Number(row["lat"]),
@@ -87,6 +88,7 @@ export class GoogleMapsComponent implements OnInit {
       options: { draggable: false },
     }]
   }
+
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
