@@ -18,6 +18,7 @@ export class GoogleMapsComponent implements OnChanges {
 
   @Output() centerChangedEvent = new EventEmitter<any>();
   @Output() infoWindowOpened = new EventEmitter<any>();
+  @Output() loadingDone = new EventEmitter<any>();
   
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
@@ -80,8 +81,10 @@ export class GoogleMapsComponent implements OnChanges {
         id:row["placesAPIRef"]
       })
     }
+
+    this.loadingDone.emit();
     console.log(this.markers)
-    
+
   }
   setupcenterMarker(){
     this.centerMarkers =[{

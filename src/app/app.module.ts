@@ -17,10 +17,10 @@ import { MatSidenavModule} from  '@angular/material/sidenav';
 import {  MatFormFieldModule} from  '@angular/material/form-field';
 import {  MatInputModule} from  '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
-import { GoogleMapsComponent } from './Map/google-maps/google-maps.component';
+import { GoogleMapsComponent } from './map/google-maps/google-maps.component';
 
 import { GoogleMapsModule } from '@angular/google-maps';
-import { DetailContainerComponent } from './Map/detail-container/detail-container.component';
+import { DetailContainerComponent } from './map/detail-container/detail-container.component';
 @NgModule({
   declarations: [
     AppComponent,

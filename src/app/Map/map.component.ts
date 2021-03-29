@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiCallerService } from '../services/api-caller.service';
 import { GeneralConstants } from '../constants/generalConstants';
 
@@ -7,7 +7,7 @@ import { GeneralConstants } from '../constants/generalConstants';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements AfterContentInit {
 
   products = [];
   showRedoSearchButton?:boolean;
@@ -71,7 +71,6 @@ export class MapComponent implements OnInit {
     this.APICaller.sendLocationRequest(this.currentLat,this.currentLong).subscribe((data: any)=>{
       console.log(data);
       console.log(data["results"])
-      this.isLoaderVisible = false;
       this.listOfResults = data["results"];
     })
   }
@@ -81,5 +80,8 @@ export class MapComponent implements OnInit {
     this.isClicked = !this.isClicked;
     this.clickedLocation = marker.id;
   }
+  loadingDone(event:any){
+    this.isLoaderVisible = false;
 
+  }
 }
