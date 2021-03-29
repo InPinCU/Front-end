@@ -10,12 +10,13 @@ import { GeneralConstants } from '../constants/generalConstants';
 export class MapComponent implements OnInit {
 
   products = [];
-  showRedoSearchButton:boolean = false;
+  showRedoSearchButton?:boolean;
   currentLat:number=GeneralConstants.defaultLat;
   currentLong:number=GeneralConstants.defaultLong;
   listOfResults:any;
   isClicked:boolean=false;
   clickedLocation?:String=undefined;
+  isLoaderVisible:boolean = true;
 
   @ViewChild('searchBar',{static: true}) searchBar?: ElementRef;
   
@@ -24,14 +25,6 @@ export class MapComponent implements OnInit {
   constructor(private APICaller:ApiCallerService) {
   }
 
-  ngOnInit(): void {
-
-    this.APICaller.sendLocationRequest(GeneralConstants.defaultLat,GeneralConstants.defaultLong).subscribe((data: [any])=>{
-      console.log(data);
-    })
-
-
-  }
   ngAfterContentInit(){
     const options = {
       componentRestrictions: { country: "us" },
@@ -40,19 +33,45 @@ export class MapComponent implements OnInit {
       types: ["restaurant"],
     };
     console.log(this.searchBar)
-    const autocomplete = new google.maps.places.Autocomplete(this.searchBar?.nativeElement, options);
- 
+    const autocomplete = new google.maps.places.Autocomplete(this.searchBar?.nativeElement);
+    autocomplete.addListener("place_changed",()=>{
+      let place = autocomplete.getPlace();
+
+      console.log(this.center.lat)
+      console.log(this.center.lng)
+      console.log(place);
+      this.center = place.geometry!.location.toJSON();
+
+    console.log(this.center.lat)
+    console.log(this.center.lng)
+      this.redoSearch();
+    })
   }
+  searchPerformed(place:any){
+    console.log(place);
+  }
+
   centerChangedEvent(event:any){
+
     this.showRedoSearchButton = true;
     this.currentLat = event.lat;
-    this.currentLong = event.lng
+    this.currentLong = event.lng;
+
+
+    if(event.reset){
+      this.redoSearch();
+    }
   }
   redoSearch(){
     this.showRedoSearchButton = false;
-    
+    console.log(this.currentLat)
+    console.log(this.currentLong)
+    this.isLoaderVisible = true;
+
     this.APICaller.sendLocationRequest(this.currentLat,this.currentLong).subscribe((data: any)=>{
       console.log(data);
+      console.log(data["results"])
+      this.isLoaderVisible = false;
       this.listOfResults = data["results"];
     })
   }

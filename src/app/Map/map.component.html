@@ -1,17 +1,21 @@
 <div layout="column" class="search-container">
   <mat-form-field flex="33" class="search-inside" >
     <mat-label style="color:#7b1fa2">Search</mat-label>
-    <input matInput type="text" #searchBar>
+    <input matInput type="text" #searchBar >
   </mat-form-field>
-
-  <input type="text" >
 
   <div *ngIf="showRedoSearchButton" flex="20">
     <button mat-raised-button (click)="redoSearch()">Redo Search</button>
   </div>
 
 </div> 
-<div class="container-view"> 
+<div class="container-view">
+
+  <div class="pluswrap" [ngStyle]="{'display':isLoaderVisible ? 'flex':'none'}">
+    <div class="plus">
+      Loading...
+    </div>
+  </div>
     <app-google-maps [center]="center" [listOfResults] = "listOfResults" (centerChangedEvent)="centerChangedEvent($event)" (infoWindowOpened)="infoWindowOpened($event)" flex='70' class="map-view"></app-google-maps>
     <app-detail-container [hidden]="!isClicked" class="detail-view" [placesAPIRef]="clickedLocation"></app-detail-container>
 </div>

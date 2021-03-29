@@ -17,8 +17,6 @@ export class DetailContainerComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     const currentItem: SimpleChange = changes.placesAPIRef;
-    console.log('prev value: ', currentItem.previousValue);
-    console.log('got item: ', currentItem.currentValue);
     if(currentItem.currentValue){
       this.callDetailsFunction();
     }

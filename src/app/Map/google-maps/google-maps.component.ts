@@ -9,7 +9,7 @@ import { Input,Output, EventEmitter, OnChanges, SimpleChanges, SimpleChange} fro
   templateUrl: './google-maps.component.html',
   styleUrls: ['./google-maps.component.scss']
 })
-export class GoogleMapsComponent implements OnInit {
+export class GoogleMapsComponent implements OnChanges {
   
   @ViewChild('googlemaps') map!: any;
   width = "100%"
@@ -44,19 +44,24 @@ export class GoogleMapsComponent implements OnInit {
   
   ngOnChanges(changes: SimpleChanges) {
     const currentItem: SimpleChange = changes.listOfResults;
-    console.log('prev value: ', currentItem.previousValue);
-    console.log('got item: ', currentItem.currentValue);
-    if(currentItem.currentValue){
-      this.updateMarkers();
+    if(currentItem){
+      if(currentItem.currentValue)
+        this.updateMarkers();
     }
+
+    /*const newCenter: SimpleChange = changes.center;
+    console.log(newCenter)
+    if(newCenter){
+      console.log(newCenter.currentValue)
+      if(newCenter.currentValue)
+        this.updateMarkers();
+    }*/
   }
   
   updateMarkers(){
     this.setupcenterMarker();
     this.markers=[];
     for (let row of this.listOfResults){
-      
-      
       
       let curentPosition:google.maps.LatLngLiteral= {
         lat: Number(row["lat"]),
@@ -75,6 +80,8 @@ export class GoogleMapsComponent implements OnInit {
         id:row["placesAPIRef"]
       })
     }
+    console.log(this.markers)
+    
   }
   setupcenterMarker(){
     this.centerMarkers =[{
@@ -95,13 +102,20 @@ export class GoogleMapsComponent implements OnInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
-      this.setupcenterMarker();
+
+      let finalOutput = {
+        lat: this.center.lat,
+        lng: this.center.lng,
+        reset:true
+      }
+      console.log("test")
+      this.centerChangedEvent.emit(finalOutput);
     })
   }
 
   getCenter(event:any){
-    let a:google.maps.LatLng = this.map.getCenter();
-    this.centerChangedEvent.emit(a.toJSON());
+    let output:google.maps.LatLng = this.map.getCenter();
+    this.centerChangedEvent.emit(output.toJSON());
   }
 
 
@@ -120,7 +134,7 @@ export class GoogleMapsComponent implements OnInit {
   addMarkerToPoint(event: google.maps.MapMouseEvent) {
     this.markerPositions.push(event.latLng.toJSON());
     console.log(this.center);
-    this.markers.push({
+    /*this.markers.push({
       position: this.markerPositions[this.markerPositions.length - 1],
       label: {
         color: 'red',
@@ -130,6 +144,6 @@ export class GoogleMapsComponent implements OnInit {
       title: 'Marker title ' + (this.markers.length + 1),
       options: { draggable: false},
       id:this.markers.length + 1
-    })
+    })*/
   }
 }
