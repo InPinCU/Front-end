@@ -63,6 +63,8 @@ export class MapComponent implements AfterContentInit {
     }
   }
   redoSearch(){
+    this.isClicked = false;
+    this.clickedLocation = undefined;
     this.showRedoSearchButton = false;
     console.log(this.currentLat)
     console.log(this.currentLong)
@@ -77,8 +79,16 @@ export class MapComponent implements AfterContentInit {
 
   infoWindowOpened(marker:any){
     console.log(marker);
-    this.isClicked = !this.isClicked;
+    if(!this.clickedLocation)
+      this.isClicked = true;
+    else if(this.clickedLocation == marker.id){
+      this.isClicked =  !this.isClicked;
+      return;
+    }
+    else
+      this.isClicked = true;
     this.clickedLocation = marker.id;
+      
   }
   loadingDone(event:any){
     this.isLoaderVisible = false;
