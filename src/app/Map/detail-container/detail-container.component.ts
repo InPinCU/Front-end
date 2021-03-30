@@ -9,7 +9,7 @@ import { ApiCallerService } from 'src/app/services/api-caller.service';
 export class DetailContainerComponent implements OnInit {
 
   @Input()
-  placesAPIRef?: String;
+  placesAPI?: any;
 
   constructor(private APICaller:ApiCallerService) { }
 
@@ -17,16 +17,17 @@ export class DetailContainerComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const currentItem: SimpleChange = changes.placesAPIRef;
+    const currentItem: SimpleChange = changes.placesAPI;
     if(currentItem.currentValue){
       this.callDetailsFunction();
     }
   }
   callDetailsFunction(){
     console.log("============");
-    console.log(this.placesAPIRef);
+    console.log(this.placesAPI["placesAPIRef"] ?? "");
+    console.log(this.placesAPI["name"] ?? "");
 
-    this.APICaller.sendLocationDetailsRequest(this.placesAPIRef ?? "").subscribe((data: any)=>{
+    this.APICaller.sendLocationDetailsRequest(this.placesAPI["placesAPIRef"]  ?? "").subscribe((data: any)=>{
       console.log(data);
       console.log(data["results"])
     })

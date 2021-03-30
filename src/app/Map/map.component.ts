@@ -17,6 +17,7 @@ export class MapComponent implements AfterContentInit {
   isClicked:boolean=false;
   clickedLocation?:String=undefined;
   isLoaderVisible:boolean = true;
+  placesAPI?:any;
 
   @ViewChild('searchBar',{static: true}) searchBar?: ElementRef;
   
@@ -87,6 +88,9 @@ export class MapComponent implements AfterContentInit {
     }
     else
       this.isClicked = true;
+    
+    let output = {"placesAPIRef":marker.id,"name":marker.placesName}
+    this.placesAPI = output;
     this.clickedLocation = marker.id;
       
   }

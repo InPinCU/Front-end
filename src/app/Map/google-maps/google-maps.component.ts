@@ -78,7 +78,8 @@ export class GoogleMapsComponent implements OnChanges {
         index:this.markers.length,
         title: row["name"],
         options: { draggable: false},
-        id:row["placesAPIRef"]
+        id:row["placesAPIRef"],
+        placesName:row["name"]
       })
     }
 
