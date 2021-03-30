@@ -18,6 +18,11 @@ export class ApiCallerService {
     let finalURL:string = AppConstants.locationAPI+"?lat="+lat+"&long="+long
     return this.RESTCaller.sendGetRequest(finalURL).pipe(map(d=>this.modify(d)));
   }
+
+  public sendLocationDetailsRequest(placesAPIRef:String ): Observable<any> {
+    let finalURL:string = AppConstants.locationDetailsAPI+"?placesAPIRef="+placesAPIRef;
+    return this.RESTCaller.sendGetRequest(finalURL).pipe(map(d=>this.modify(d)));
+  }
   
   modify(data:any){
     data['myOwnProperty'] = "Hey There, I am added by decorator !!"

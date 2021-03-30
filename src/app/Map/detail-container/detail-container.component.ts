@@ -1,4 +1,5 @@
 import { Component, OnInit,Input, SimpleChanges, SimpleChange } from '@angular/core';
+import { ApiCallerService } from 'src/app/services/api-caller.service';
 
 @Component({
   selector: 'app-detail-container',
@@ -10,7 +11,7 @@ export class DetailContainerComponent implements OnInit {
   @Input()
   placesAPIRef?: String;
 
-  constructor() { }
+  constructor(private APICaller:ApiCallerService) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +25,11 @@ export class DetailContainerComponent implements OnInit {
   callDetailsFunction(){
     console.log("============");
     console.log(this.placesAPIRef);
+
+    this.APICaller.sendLocationDetailsRequest(this.placesAPIRef ?? "").subscribe((data: any)=>{
+      console.log(data);
+      console.log(data["results"])
+    })
   }
 
 }
