@@ -16,9 +16,12 @@
                     <span class="fa fa-star" [ngClass]="this!.rating >=5 ? 'checked':''"></span>
                 </div>
             </div>
-            <div class="insta-info">
-                
+
+
+            <div *ngIf="instaInfo">
+                <app-insta [instaInfoArr]="instaInfoArr"></app-insta>
             </div>
+
             <div *ngIf="!yelpInfo && !instaInfo">
                 No additional information currently available
             </div>

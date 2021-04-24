@@ -15,6 +15,7 @@ export class DetailContainerComponent implements OnInit {
   rating?:Number;
   yelpInfo?:any;
   instaInfo?:any;
+  instaInfoArr:any[]=[];
   
 
   constructor(private APICaller:ApiCallerService) { }
@@ -42,6 +43,20 @@ export class DetailContainerComponent implements OnInit {
       }else{
         this.rating = undefined;
         this.yelpInfo = undefined;
+      }
+      if ("insta" in data["results"] && "recPosts" in data.results.insta){
+        let instaInfo = data["results"]["insta"];
+        this.instaInfo = instaInfo;
+       
+        this.instaInfoArr =  Object.keys(instaInfo["recPosts"]).map(function(key){
+                                var arr:any[]=[];
+                                arr.push(instaInfo["recPosts"][key])  
+                                return arr;  
+                            });  
+        console.log(this.instaInfoArr)
+      }else{
+        this.instaInfoArr = [];
+        this.instaInfo = undefined;
       }
     })
   }
