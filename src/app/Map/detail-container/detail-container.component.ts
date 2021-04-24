@@ -48,12 +48,10 @@ export class DetailContainerComponent implements OnInit {
         let instaInfo = data["results"]["insta"];
         this.instaInfo = instaInfo;
        
+        var arr:any[]=[];
         this.instaInfoArr =  Object.keys(instaInfo["recPosts"]).map(function(key){
-                                var arr:any[]=[];
-                                arr.push(instaInfo["recPosts"][key])  
-                                return arr;  
+                                return instaInfo["recPosts"][key];  
                             });  
-        console.log(this.instaInfoArr)
       }else{
         this.instaInfoArr = [];
         this.instaInfo = undefined;

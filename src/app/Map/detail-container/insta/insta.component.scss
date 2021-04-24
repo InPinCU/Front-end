@@ -10,8 +10,11 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
 
 /* Base Styles */
 .insta-info{
-    max-height: 50vh;
-    overflow-y: auto;
+    .insta-posts{
+        max-height: 60vh;
+        overflow-y: auto;
+
+    }
     
 :root {
     font-size: 10px;
@@ -146,6 +149,32 @@ img {
 
 /* Gallery Section */
 
+/*
+ *  STYLE 2
+ */
+ .caption{
+    text-align: center;
+    color: #555;
+    background-color: #F5F5F5;
+ }
+ .scroll-style-2::-webkit-scrollbar-track
+ {
+    border-radius: 10px;
+    background-color: #F5F5F5;
+ }
+ 
+ .scroll-style-2::-webkit-scrollbar
+ {
+    width: 12px;
+    background-color: #F5F5F5;
+ }
+ 
+ .scroll-style-2::-webkit-scrollbar-thumb
+ {
+    border-radius: 10px;
+    background-color: #555;
+ }
+ 
 .gallery {
     display: flex;
     flex-wrap: wrap;
