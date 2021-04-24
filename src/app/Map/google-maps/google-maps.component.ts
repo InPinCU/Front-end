@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Input,Output, EventEmitter, OnChanges, SimpleChanges, SimpleChange} from '@angular/core';
+import { GeneralConstants } from '../../constants/generalConstants';
 
 @Component({
   selector: 'app-google-maps',
@@ -23,7 +24,16 @@ export class GoogleMapsComponent implements OnChanges {
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPositions: google.maps.LatLngLiteral[] = [];
   centerMarkers:any[] = []
-  markers:any[] = []
+  markers:any[] = [] 
+  imageIconLink ="../../../assets/flame-icon.png";
+  imageIcon = {
+    url: this.imageIconLink, // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0), // anchor
+    labelOrigin: new google.maps.Point(0, 30)
+  };
+
 
   @Input()
   center!: google.maps.LatLngLiteral;
@@ -36,7 +46,18 @@ export class GoogleMapsComponent implements OnChanges {
     scaleControl: false,
     streetViewControl: false,
     rotateControl: false,
-    fullscreenControl: false
+    fullscreenControl: false,
+    styles:[
+      {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      }
+    ]
   };
 
   constructor(httpClient: HttpClient) {
@@ -68,7 +89,9 @@ export class GoogleMapsComponent implements OnChanges {
         lat: Number(row["lat"]),
         lng: Number(row["long"])
       }
-
+      console.log(row);
+      let factor = row.trendingScore / 100;
+      this.imageIcon.scaledSize = new google.maps.Size(30*factor, 30*factor)
       this.markers.push({
         position: curentPosition,
         label: {
@@ -77,7 +100,8 @@ export class GoogleMapsComponent implements OnChanges {
         },
         index:this.markers.length,
         title: row["name"],
-        options: { draggable: false},
+        options: { 
+          icon: this.imageIcon,draggable: false},
         id:row["placesAPIRef"],
         placesName:row["name"]
       })
@@ -91,8 +115,8 @@ export class GoogleMapsComponent implements OnChanges {
     this.centerMarkers =[{
       position: this.center,
       label: {
-        color: 'red',
-        text: 'Current Location',
+        color: 'black',
+        text: 'You',
       },
       index:this.markers.length,
       title: 'Current Location',
@@ -114,6 +138,23 @@ export class GoogleMapsComponent implements OnChanges {
       }
       console.log("test")
       this.centerChangedEvent.emit(finalOutput);
+    }, failure => {
+      console.log(failure);
+      
+      this.center = {
+        lat: GeneralConstants.defaultLat,
+        lng: GeneralConstants.defaultLong,
+      }
+      let finalOutput = {
+        lat: this.center.lat,
+        lng: this.center.lng,
+        reset:true
+      }
+      this.centerChangedEvent.emit(finalOutput);
+
+      if (failure.message.startsWith("Only secure origins are allowed")) {
+        // Secure Origin issue.
+      }
     })
   }
 
