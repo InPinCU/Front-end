@@ -16,11 +16,13 @@ import { MatButtonModule} from  '@angular/material/button';
 import { MatSidenavModule} from  '@angular/material/sidenav';
 import {  MatFormFieldModule} from  '@angular/material/form-field';
 import {  MatInputModule} from  '@angular/material/input';
+import {MatRippleModule} from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsComponent } from './map/google-maps/google-maps.component';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 import { DetailContainerComponent } from './map/detail-container/detail-container.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { DetailContainerComponent } from './map/detail-container/detail-containe
     MatIconModule,
     GoogleMapsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

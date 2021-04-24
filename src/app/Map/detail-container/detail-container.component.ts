@@ -10,6 +10,12 @@ export class DetailContainerComponent implements OnInit {
 
   @Input()
   placesAPI?: any;
+  myColor: string="";
+  loading:boolean = true;
+  rating?:Number;
+  yelpInfo?:any;
+  instaInfo?:any;
+  
 
   constructor(private APICaller:ApiCallerService) { }
 
@@ -26,10 +32,17 @@ export class DetailContainerComponent implements OnInit {
     console.log("============");
     console.log(this.placesAPI["placesAPIRef"] ?? "");
     console.log(this.placesAPI["name"] ?? "");
-
+    this.loading = true;
     this.APICaller.sendLocationDetailsRequest(this.placesAPI["placesAPIRef"]  ?? "").subscribe((data: any)=>{
-      console.log(data);
+      this.loading = false;
       console.log(data["results"])
+      if ("yelp" in data["results"]){
+        this.rating = data["results"]["yelp"]["yelp_info"].rating;
+        this.yelpInfo = data["results"]["yelp"]["yelp_info"];
+      }else{
+        this.rating = undefined;
+        this.yelpInfo = undefined;
+      }
     })
   }
 
