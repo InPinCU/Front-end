@@ -22,6 +22,7 @@ import { GoogleMapsComponent } from './map/google-maps/google-maps.component';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 import { DetailContainerComponent } from './map/detail-container/detail-container.component';
+import { InstaComponent } from './map/detail-container/insta/insta.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DetailContainerComponent } from './map/detail-container/detail-containe
     HeaderComponent,
     PageNotFoundComponent,
     GoogleMapsComponent,
-    DetailContainerComponent
+    DetailContainerComponent,
+    InstaComponent
   ],
   imports: [
     BrowserModule,
