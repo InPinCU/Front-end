@@ -25,7 +25,7 @@ export class GoogleMapsComponent implements OnChanges {
   markerPositions: google.maps.LatLngLiteral[] = [];
   centerMarkers:any[] = []
   markers:any[] = [] 
-  imageIconLink ="../../../assets/flame-icon.png";
+  imageIconLink ="../../../assets/fire-icon.png";
   imageIcon = {
     url: this.imageIconLink, // url
     scaledSize: new google.maps.Size(30, 30), // scaled size
@@ -91,7 +91,19 @@ export class GoogleMapsComponent implements OnChanges {
       }
       console.log(row);
       let factor = row.trendingScore / 100;
-      this.imageIcon.scaledSize = new google.maps.Size(30*factor, 30*factor)
+      console.log(factor);
+      let newImageIcon = {
+        url: this.imageIcon.url, // url
+        scaledSize:  this.imageIcon.scaledSize, // scaled size
+        origin: this.imageIcon.origin, // origin
+        anchor: this.imageIcon.anchor, // anchor
+        labelOrigin: this.imageIcon.labelOrigin
+      };
+      console.log(newImageIcon.scaledSize);
+      factor = factor < 0.5? 0.5 :factor;
+      newImageIcon.scaledSize = new google.maps.Size(30*factor, 30*factor)
+
+      console.log(newImageIcon.scaledSize);
       this.markers.push({
         position: curentPosition,
         label: {
@@ -101,7 +113,7 @@ export class GoogleMapsComponent implements OnChanges {
         index:this.markers.length,
         title: row["name"],
         options: { 
-          icon: this.imageIcon,draggable: false},
+          icon: newImageIcon,draggable: false},
         id:row["placesAPIRef"],
         placesName:row["name"]
       })
