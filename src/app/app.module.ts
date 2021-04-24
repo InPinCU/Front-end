@@ -23,6 +23,7 @@ import { GoogleMapsComponent } from './map/google-maps/google-maps.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { DetailContainerComponent } from './map/detail-container/detail-container.component';
 import { InstaComponent } from './map/detail-container/insta/insta.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { InstaComponent } from './map/detail-container/insta/insta.component';
     GoogleMapsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule
+    MatRippleModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

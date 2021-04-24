@@ -8,6 +8,11 @@
     <button mat-raised-button (click)="redoSearch()">Redo Search</button>
   </div>
 
+  <mat-chip-list aria-label="Fish selection" class="type-list">
+    <mat-chip color="primary" selected>All</mat-chip>
+    <mat-chip *ngFor="let type of types">{{type}}</mat-chip>
+  </mat-chip-list>
+  
 </div> 
 <div class="container-view">
 

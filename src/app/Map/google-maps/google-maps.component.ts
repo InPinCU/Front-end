@@ -89,9 +89,7 @@ export class GoogleMapsComponent implements OnChanges {
         lat: Number(row["lat"]),
         lng: Number(row["long"])
       }
-      console.log(row);
       let factor = row.trendingScore / 100;
-      console.log(factor);
       let newImageIcon = {
         url: this.imageIcon.url, // url
         scaledSize:  this.imageIcon.scaledSize, // scaled size
@@ -99,11 +97,9 @@ export class GoogleMapsComponent implements OnChanges {
         anchor: this.imageIcon.anchor, // anchor
         labelOrigin: this.imageIcon.labelOrigin
       };
-      console.log(newImageIcon.scaledSize);
       factor = factor < 0.5? 0.5 :factor;
       newImageIcon.scaledSize = new google.maps.Size(30*factor, 30*factor)
 
-      console.log(newImageIcon.scaledSize);
       this.markers.push({
         position: curentPosition,
         label: {
@@ -120,7 +116,6 @@ export class GoogleMapsComponent implements OnChanges {
     }
 
     this.loadingDone.emit();
-    console.log(this.markers)
 
   }
   setupcenterMarker(){
@@ -148,10 +143,8 @@ export class GoogleMapsComponent implements OnChanges {
         lng: this.center.lng,
         reset:true
       }
-      console.log("test")
       this.centerChangedEvent.emit(finalOutput);
     }, failure => {
-      console.log(failure);
       
       this.center = {
         lat: GeneralConstants.defaultLat,
@@ -190,7 +183,6 @@ export class GoogleMapsComponent implements OnChanges {
   }
   addMarkerToPoint(event: google.maps.MapMouseEvent) {
     this.markerPositions.push(event.latLng.toJSON());
-    console.log(this.center);
     /*this.markers.push({
       position: this.markerPositions[this.markerPositions.length - 1],
       label: {

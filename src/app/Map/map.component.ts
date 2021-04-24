@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiCallerService } from '../services/api-caller.service';
 import { GeneralConstants } from '../constants/generalConstants';
 
@@ -9,7 +9,7 @@ import { GeneralConstants } from '../constants/generalConstants';
 })
 export class MapComponent implements AfterContentInit {
 
-  products = [];
+  types:any[] = [];
   showRedoSearchButton?:boolean;
   currentLat:number=GeneralConstants.defaultLat;
   currentLong:number=GeneralConstants.defaultLong;
@@ -18,12 +18,12 @@ export class MapComponent implements AfterContentInit {
   clickedLocation?:String=undefined;
   isLoaderVisible:boolean = true;
   placesAPI?:any;
-
+  resetSearch:boolean = true;
   @ViewChild('searchBar',{static: true}) searchBar?: ElementRef;
   
   center: google.maps.LatLngLiteral={lat:this.currentLat,lng:this.currentLong};
 
-  constructor(private APICaller:ApiCallerService) {
+  constructor(private APICaller:ApiCallerService,private ref: ChangeDetectorRef) {
   }
 
   ngAfterContentInit(){
@@ -42,9 +42,9 @@ export class MapComponent implements AfterContentInit {
       console.log(this.center.lng)
       console.log(place);
       this.center = place.geometry!.location.toJSON();
-
-    console.log(this.center.lat)
-    console.log(this.center.lng)
+      this.ref.detectChanges();
+      console.log(this.center.lat)
+      console.log(this.center.lng)
       this.redoSearch();
     })
   }
@@ -72,9 +72,18 @@ export class MapComponent implements AfterContentInit {
     this.isLoaderVisible = true;
 
     this.APICaller.sendLocationRequest(this.currentLat,this.currentLong).subscribe((data: any)=>{
-      console.log(data);
       console.log(data["results"])
+      
+      this.isLoaderVisible = false;
       this.listOfResults = data["results"];
+      this.listOfResults.forEach((element: any) => {
+          this.types.push(element["types"]);
+      });
+      this.types = this.types.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
+      })
+      console.log(this.types);
+      this.ref.detectChanges();
     })
   }
 

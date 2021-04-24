@@ -11,7 +11,12 @@
 }
 .search-container{
     padding:10px;
-    height:10vh
+    height:10vh;
+    display: flex;
+    flex-direction: row;
+}
+.type-list{
+    padding-left: 10px;
 }
 .search-inside{
     float:left;
