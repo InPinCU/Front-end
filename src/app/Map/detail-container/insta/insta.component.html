@@ -1,7 +1,7 @@
 <div class=" insta-info ">
     Posts from Instagram
     <div class="insta-posts scroll-style-2">
-			<div class="gallery-item" tabindex="0" *ngFor="let item of instaInfoArr" [hidden]="item.hidden" style="margin-bottom:20px;">
+			<div class="gallery-item" tabindex="0" *ngFor="let item of instaInfoArr" [hidden]="item.hidden" style="margin-bottom:20px; max-width:100%;">
 				<img [src]="item.dispURL" class="gallery-image" alt="" (error)="item.hidden = true" >
 
 				<div class="gallery-item-info">
