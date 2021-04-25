@@ -10,6 +10,7 @@ import { GeneralConstants } from '../constants/generalConstants';
 export class MapComponent implements AfterContentInit {
 
   types:any[] = [];
+  count?:number;
   showRedoSearchButton?:boolean;
   currentLat:number=GeneralConstants.defaultLat;
   currentLong:number=GeneralConstants.defaultLong;
@@ -81,6 +82,7 @@ export class MapComponent implements AfterContentInit {
       this.isLoaderVisible = false;
 
       this.allListOfResults = data["results"];
+      this.count = this.allListOfResults.length;
       this.allListOfResults.forEach((element: any) => {
           let arr = element["types"].split("|");
           arr.forEach((element2: any) => {

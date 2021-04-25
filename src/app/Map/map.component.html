@@ -12,7 +12,7 @@
     <mat-chip color="primary" [selected]="allSelected" (click)="allfilterClicked()">All</mat-chip>
     <mat-chip *ngFor="let type of types" (click)="filterClicked(type)" [selected]="type.selected">{{type.text}}</mat-chip>
   </mat-chip-list>
-  
+  <div class="number-found" *ngIf="count">Found {{count}} places near you!!</div>
 </div> 
 <div class="container-view">
 
