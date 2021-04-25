@@ -1,4 +1,6 @@
 import { Component, OnInit,Input, SimpleChanges, SimpleChange } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ApiCallerService } from 'src/app/services/api-caller.service';
 
 @Component({
@@ -10,6 +12,8 @@ export class DetailContainerComponent implements OnInit {
 
   @Input()
   placesAPI?: any;
+  score = 0;
+  scoreNum:number = 0;
   myColor: string="";
   loading:boolean = true;
   rating?:Number;
@@ -17,6 +21,8 @@ export class DetailContainerComponent implements OnInit {
   instaInfo?:any;
   instaInfoArr:any[]=[];
   
+  color: ThemePalette = 'accent';
+  mode: ProgressSpinnerMode = 'determinate';
 
   constructor(private APICaller:ApiCallerService) { }
 
@@ -34,6 +40,8 @@ export class DetailContainerComponent implements OnInit {
     console.log(this.placesAPI["placesAPIRef"] ?? "");
     console.log(this.placesAPI["name"] ?? "");
     this.loading = true;
+    this.score = this.placesAPI.score;
+    this.scoreNum = this.placesAPI.score;
     this.APICaller.sendLocationDetailsRequest(this.placesAPI["placesAPIRef"]  ?? "").subscribe((data: any)=>{
       this.loading = false;
       console.log(data["results"])

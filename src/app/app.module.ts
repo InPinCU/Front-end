@@ -24,9 +24,11 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { DetailContainerComponent } from './map/detail-container/detail-container.component';
 import { InstaComponent } from './map/detail-container/insta/insta.component';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import Amplify from '@aws-amplify/core';
 import { Auth } from 'aws-amplify';
 import { environment} from 'src/environments/environment'
+
 
 /* Configure Amplify resources */
 Amplify.configure({
@@ -101,7 +103,8 @@ const currentConfig = Auth.configure();
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

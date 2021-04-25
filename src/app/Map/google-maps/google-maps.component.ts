@@ -111,7 +111,8 @@ export class GoogleMapsComponent implements OnChanges {
         options: { 
           icon: newImageIcon,draggable: false},
         id:row["placesAPIRef"],
-        placesName:row["name"]
+        placesName:row["name"],
+        placesScore:row["trendingScore"]
       })
     }
 
