@@ -10,7 +10,14 @@
         <a mat-button [routerLink]="'/map'"> Home </a>
         <a mat-button [routerLink]="'/favorites'"> Favorites </a>
       </div>
-      <button (click)="callSignIn()">Sign in</button>
+      <div class="login-buttons">
+
+        <button mat-raised-button color="accent" (click)="callSignIn()" *ngIf="!loginServ.user">Sign in</button>
+        <div *ngIf="loginServ.user" class="logout-container">
+          <div class="user-name"><img src="./../../assets/login.png"> {{loginServ.user.attributes.name}}</div>
+          <button mat-raised-button color="warn" (click)="callSignOut()" >Sign Out</button>
+        </div>
+      </div>
     </mat-toolbar-row>
   
     <mat-toolbar-row> 

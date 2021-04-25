@@ -9,12 +9,15 @@ import {LoginService} from 'src/app/services/login.service'
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private loginServ: LoginService) { }
+  constructor(public loginServ: LoginService) { }
 
   ngOnInit(): void {
-    this.loginServ.getLoggedInUser();
   }
   callSignIn(){
     this.loginServ.login();
+  }
+  callSignOut(){
+    this.loginServ.logout();
+
   }
 }

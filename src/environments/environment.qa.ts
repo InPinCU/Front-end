@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  userPoolWebClientId: '77q5dviq1e0rcu9gr68jumm1h3',
-  redirectSignIn: 'http://localhost:4200',
-  redirectSignOut: 'http://localhost:4200',
+  userPoolWebClientId: '34bleodvuh7la2vmd8qc9qu9sv',
+  redirectSignIn: 'https://d1gcrwnguile1x.cloudfront.net',
+  redirectSignOut: 'https://d1gcrwnguile1x.cloudfront.net',
   
 };
 
