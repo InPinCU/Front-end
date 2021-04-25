@@ -1,6 +1,6 @@
 
 
-<app-header></app-header>
+<app-header [user]="userData" (login)="callSignIn()" (logout)="callSignOut()"></app-header>
 
 <router-outlet>
 

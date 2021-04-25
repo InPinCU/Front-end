@@ -25,6 +25,7 @@ import { DetailContainerComponent } from './map/detail-container/detail-containe
 import { InstaComponent } from './map/detail-container/insta/insta.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTableModule} from '@angular/material/table';
 import Amplify from '@aws-amplify/core';
 import { Auth } from 'aws-amplify';
 import { environment} from 'src/environments/environment'
@@ -104,7 +105,8 @@ const currentConfig = Auth.configure();
     MatInputModule,
     MatRippleModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

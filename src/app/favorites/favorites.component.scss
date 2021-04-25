@@ -1,0 +1,41 @@
+.not-logged-in{
+    
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    margin-left: 10px;
+}
+.headerText{
+    padding:15px;
+}
+.fav-container{
+    display:flex;
+    .fav-list{
+        flex:25;
+        max-height: 80vh;
+        overflow-y: auto;
+        .fav-table{
+            width:100%;
+            .rowData{
+                display:flex;
+                padding-top:20px;
+            }
+        }
+    }
+    .detail-view{
+        flex:25;
+    }
+    .map-view{
+        flex:50;
+    }
+}
+.spinner{
+  margin-left:auto;
+  .spinner-text{
+    margin-bottom: -35px;
+    margin-left: 12px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: normal;
+    color:white;
+  }
+}

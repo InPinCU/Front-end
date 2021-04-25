@@ -6,8 +6,8 @@ import { Auth , Hub } from 'aws-amplify';
   providedIn: 'root'
 })
 export class LoginService {
-  user:any;
-  userExtraData:any;
+  static user:any;
+  static userExtraData:any;
   constructor() {
     
     // Used for listening to login events
@@ -15,14 +15,14 @@ export class LoginService {
       console.log(event);
       console.log(data);
       if (event === "cognitoHostedUI" || event === "signedIn") {
-        this.userExtraData = data;
+        LoginService.userExtraData = data;
       }
     });
 
     //currentAuthenticatedUser: when user comes to login page again
     Auth.currentAuthenticatedUser()
       .then((data) => {
-        this.user = data;
+        LoginService.user = data;
       }).catch((err) => {
         console.log(err);
       })

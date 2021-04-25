@@ -8,13 +8,13 @@
       <span class="menu-spacer"></span>
       <div>
         <a mat-button [routerLink]="'/map'"> Home </a>
-        <a mat-button [routerLink]="'/favorites'"> Favorites </a>
+        <a mat-button [routerLink]="'/favorite'"> Favorites </a>
       </div>
       <div class="login-buttons">
 
-        <button mat-raised-button color="accent" (click)="callSignIn()" *ngIf="!loginServ.user">Sign in</button>
-        <div *ngIf="loginServ.user" class="logout-container">
-          <div class="user-name"><img src="./../../assets/login.png"> {{loginServ.user.attributes.name}}</div>
+        <button mat-raised-button color="accent" (click)="callSignIn()" *ngIf="!this.user">Sign in</button>
+        <div *ngIf="this.user" class="logout-container">
+          <div class="user-name"><img src="./../../assets/login.png"> {{this.user.attributes.name}}</div>
           <button mat-raised-button color="warn" (click)="callSignOut()" >Sign Out</button>
         </div>
       </div>

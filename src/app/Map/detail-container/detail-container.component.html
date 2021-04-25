@@ -5,6 +5,11 @@
             <p class="nameText"> 
                 {{placesAPI["name"] }}
             </p>
+            <div class="favorite-button" *ngIf="!this.loading && this.userData">
+
+                <button mat-raised-button color="accent" (click)="markAsFavorite(true)" *ngIf="!this.isFavorite">Remember</button>
+                <button mat-raised-button color="accent" (click)="markAsFavorite(false)" *ngIf="this.isFavorite">Forget</button>
+            </div>
             <div class="spinner">
                 <div class="spinner-text">{{scoreNum.toLocaleString().split('.')[0]}} %</div>
                 <mat-progress-spinner  [color]="color" [mode]="mode" [value]="score" [diameter]="50">

@@ -2,6 +2,7 @@ import { Component, OnInit,Input, SimpleChanges, SimpleChange } from '@angular/c
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ApiCallerService } from 'src/app/services/api-caller.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-detail-container',
@@ -19,6 +20,7 @@ export class DetailContainerComponent implements OnInit {
   rating?:Number;
   yelpInfo?:any;
   instaInfo?:any;
+  isFavorite?:boolean;
   instaInfoArr:any[]=[];
   
   color: ThemePalette = 'accent';
@@ -42,7 +44,7 @@ export class DetailContainerComponent implements OnInit {
     this.loading = true;
     this.score = this.placesAPI.score;
     this.scoreNum = this.placesAPI.score;
-    this.APICaller.sendLocationDetailsRequest(this.placesAPI["placesAPIRef"]  ?? "").subscribe((data: any)=>{
+    this.APICaller.sendLocationDetailsRequest(this.placesAPI["placesAPIRef"]  ?? "",this.userData.attributes.email).subscribe((data: any)=>{
       this.loading = false;
       console.log(data["results"])
       if ("yelp" in data["results"]){
@@ -51,6 +53,11 @@ export class DetailContainerComponent implements OnInit {
       }else{
         this.rating = undefined;
         this.yelpInfo = undefined;
+      }
+      if ("favorite" in data["results"]){
+        this.isFavorite = data["results"]["favorite"]
+      }else{
+        this.isFavorite = undefined;
       }
       if ("insta" in data["results"] && "recPosts" in data.results.insta){
         let instaInfo = data["results"]["insta"];
@@ -67,4 +74,13 @@ export class DetailContainerComponent implements OnInit {
     })
   }
 
+  get userData() {
+    return LoginService.user;
+  }
+  markAsFavorite(flag:boolean){
+    
+    this.APICaller.sendFavSetRequest(this.userData.attributes.email,this.placesAPI["placesAPIRef"]  ?? "",flag).subscribe((data: any)=>{
+     this.isFavorite = data["markAsFav"] == 1 ? true : false;
+    })
+  }
 }
