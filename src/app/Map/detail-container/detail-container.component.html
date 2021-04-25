@@ -8,7 +8,7 @@
             <div class="favorite-button" *ngIf="!this.loading && this.userData">
 
                 <button mat-raised-button color="accent" (click)="markAsFavorite(true)" *ngIf="!this.isFavorite">Remember</button>
-                <button mat-raised-button color="accent" (click)="markAsFavorite(false)" *ngIf="this.isFavorite">Forget</button>
+                <button mat-raised-button color="warn" (click)="markAsFavorite(false)" *ngIf="this.isFavorite">Forget</button>
             </div>
             <div class="spinner">
                 <div class="spinner-text">{{scoreNum.toLocaleString().split('.')[0]}} %</div>
