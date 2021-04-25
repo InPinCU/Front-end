@@ -29,7 +29,6 @@ export class FavoritesComponent implements OnInit {
   }
   getListOfFavorites(){
     this.APICaller.sendFavLocationRequest(this.userData.attributes.email).subscribe((data: any)=>{
-      debugger;
       console.log(data["results"]);
 
       this.dataSource = data["results"];
