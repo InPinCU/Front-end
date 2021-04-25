@@ -10,9 +10,11 @@
         <a mat-button [routerLink]="'/map'"> Home </a>
         <a mat-button [routerLink]="'/favorites'"> Favorites </a>
       </div>
+      <button (click)="callSignIn()">Sign in</button>
     </mat-toolbar-row>
   
     <mat-toolbar-row> 
         <span style="font-size: 12px;">TrendMap allows you to see popular places around you</span>
       </mat-toolbar-row>
+
   </mat-toolbar>
