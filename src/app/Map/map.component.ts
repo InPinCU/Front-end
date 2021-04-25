@@ -35,18 +35,16 @@ export class MapComponent implements AfterContentInit {
       strictBounds: false,
       types: ["restaurant"],
     };
-    console.log(this.searchBar)
+    
     const autocomplete = new google.maps.places.Autocomplete(this.searchBar?.nativeElement);
+    
     autocomplete.addListener("place_changed",()=>{
       let place = autocomplete.getPlace();
 
-      console.log(this.center.lat)
-      console.log(this.center.lng)
-      console.log(place);
+      this.currentLat =  place.geometry!.location.lat();
+      this.currentLong = place.geometry!.location.lng();
       this.center = place.geometry!.location.toJSON();
       this.ref.detectChanges();
-      console.log(this.center.lat)
-      console.log(this.center.lng)
       this.redoSearch();
     })
   }
@@ -66,6 +64,7 @@ export class MapComponent implements AfterContentInit {
     }
   }
   redoSearch(){
+    this.center = {lat:this.currentLat,lng:this.currentLong};
     this.isClicked = false;
     this.clickedLocation = undefined;
     this.showRedoSearchButton = false;
@@ -75,7 +74,7 @@ export class MapComponent implements AfterContentInit {
 
     this.APICaller.sendLocationRequest(this.currentLat,this.currentLong).subscribe((data: any)=>{
       console.log(data["results"])
-      this.types=["test"];
+      this.types=[];
       this.listOfResults=[];
       this.allSelected = true;
 
