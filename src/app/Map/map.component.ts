@@ -14,11 +14,13 @@ export class MapComponent implements AfterContentInit {
   currentLat:number=GeneralConstants.defaultLat;
   currentLong:number=GeneralConstants.defaultLong;
   listOfResults:any;
+  allListOfResults:any;
   isClicked:boolean=false;
   clickedLocation?:String=undefined;
   isLoaderVisible:boolean = true;
   placesAPI?:any;
   resetSearch:boolean = true;
+  allSelected:boolean = true;
   @ViewChild('searchBar',{static: true}) searchBar?: ElementRef;
   
   center: google.maps.LatLngLiteral={lat:this.currentLat,lng:this.currentLong};
@@ -73,20 +75,54 @@ export class MapComponent implements AfterContentInit {
 
     this.APICaller.sendLocationRequest(this.currentLat,this.currentLong).subscribe((data: any)=>{
       console.log(data["results"])
-      
+      this.types=["test"];
+      this.listOfResults=[];
+      this.allSelected = true;
+
       this.isLoaderVisible = false;
-      this.listOfResults = data["results"];
-      this.listOfResults.forEach((element: any) => {
-          this.types.push(element["types"]);
+
+      this.allListOfResults = data["results"];
+      this.allListOfResults.forEach((element: any) => {
+          let arr = element["types"].split("|");
+          arr.forEach((element2: any) => {
+            this.types.push(element2);
+          });
+          this.listOfResults.push(element);
       });
       this.types = this.types.filter(function(elem, index, self) {
         return index === self.indexOf(elem);
+      })
+      this.types = this.types.map(function(element,index) {
+        return {"text":element,"selected":false,"index":index}
       })
       console.log(this.types);
       this.ref.detectChanges();
     })
   }
-
+  filterClicked(type:any){
+    console.log(type);
+    type.selected = !type.selected;
+    this.allSelected = false;
+    let selectedTypes = this.types.filter(element => element.selected).map(element => element.text);
+    console.log()
+    this.listOfResults = this.allListOfResults.filter((element: any) =>{
+      console.log(element);
+      let arr = element["types"].split("|");
+      return selectedTypes.some(r=> arr.includes(r));
+    })
+    console.log(this.listOfResults);
+  }
+  allfilterClicked(){
+    this.allSelected = !this.allSelected;
+    this.types.forEach(element =>{
+      element.selected = false;
+    })
+    if(this.allSelected)
+      this.listOfResults = this.allListOfResults;
+    else
+      this.listOfResults = [];
+    console.log(this.listOfResults);
+  }
   infoWindowOpened(marker:any){
     console.log(marker);
     if(!this.clickedLocation)
