@@ -28,7 +28,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import Amplify from '@aws-amplify/core';
 import { Auth } from 'aws-amplify';
-import { environment} from 'src/environments/environment'
+import { environment} from 'src/environments/environment';
+import { MapLocationComponent } from './favorites/map-location/map-location.component'
 
 
 /* Configure Amplify resources */
@@ -88,7 +89,8 @@ const currentConfig = Auth.configure();
     PageNotFoundComponent,
     GoogleMapsComponent,
     DetailContainerComponent,
-    InstaComponent
+    InstaComponent,
+    MapLocationComponent
   ],
   imports: [
     BrowserModule,

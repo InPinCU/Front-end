@@ -1,0 +1,16 @@
+
+
+<google-map height={{height}} width={{width}} [center]="center" [options]="options" 
+#googlemaps class="map-container">
+
+
+<map-marker
+  *ngFor="let marker of centerMarkers"
+  [position]="marker.position"
+  [label]="marker.label"
+  [title]="marker.title"
+  [options]="marker.options"
+>
+</map-marker>
+
+</google-map>

@@ -25,6 +25,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
     </div>
-    <app-detail-container [hidden]="!isClicked"  class="map-view" [placesAPI]="placesAPI"></app-detail-container>
+    <app-map-location class="map-view" [placesAPI]="placesAPI" [center]="center" [hidden]="!isClicked"></app-map-location>
     <app-detail-container [hidden]="!isClicked"  class="detail-view" [placesAPI]="placesAPI"></app-detail-container>
 </div>

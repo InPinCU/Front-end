@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import {LoginService} from 'src/app/services/login.service'
+import { GeneralConstants } from '../constants/generalConstants';
 import { ApiCallerService } from '../services/api-caller.service';
 
 @Component({
@@ -16,6 +17,10 @@ export class FavoritesComponent implements OnInit {
   placesAPI:any;
   dataSource:any[]=[];
   displayedColumns: string[] = [ 'name'];
+  currentLat:number=GeneralConstants.defaultLat;
+  currentLong:number=GeneralConstants.defaultLong;
+  center: google.maps.LatLngLiteral={lat:this.currentLat,lng:this.currentLong};
+
   constructor(private APICaller:ApiCallerService,private ref: ChangeDetectorRef,public loginServ: LoginService) {
   }
 
@@ -38,5 +43,6 @@ export class FavoritesComponent implements OnInit {
   showLocation(element:any){
     this.isClicked = true;
     this.placesAPI = {name: element.name, score: element.trendingScore, placesAPIRef: element.placesAPIRef};
+    this.center = {lat:Number(element.lat),lng:Number(element.long)};
   }
 }
