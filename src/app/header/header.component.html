@@ -1,24 +1,27 @@
 
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <div class="home-data">
+     
+      <a mat-button [routerLink]="'/map'"> 
+          
+       <div class="home-data">
 
         <button mat-icon-button >
           <img src="./../../assets/fire.svg" class="map-icon">
         </button>
         <h1 class="title">TrendMap</h1>
       </div>
+      </a>
       <span class="menu-spacer"></span>
       <div>
-        <a mat-button [routerLink]="'/map'"> Home </a>
-        <a mat-button [routerLink]="'/favorite'"> Favorites </a>
+        <a mat-button [routerLink]="'/favorite'"  matTooltip="View Favorites"> <img src="./../../assets/playlist.svg" class="map-icon"> </a>
       </div>
       <div class="login-buttons">
 
-        <button mat-raised-button color="accent" (click)="callSignIn()" *ngIf="!this.user">Sign in</button>
+        <button mat-raised-button color="accent" (click)="callSignIn()" *ngIf="!this.user">Login</button>
         <div *ngIf="this.user" class="logout-container">
-          <div class="user-name"><img src="./../../assets/login.png"> {{this.user.attributes.name}}</div>
-          <button mat-raised-button color="warn" (click)="callSignOut()" >Sign Out</button>
+          <div class="user-name">{{this.user.attributes.name}}</div>
+          <a mat-button (click)="callSignOut()"> <img src="./../../assets/logout.svg" class="map-icon"> </a>
         </div>
       </div>
     </mat-toolbar-row>
