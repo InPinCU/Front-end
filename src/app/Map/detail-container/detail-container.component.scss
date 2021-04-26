@@ -7,6 +7,20 @@
   margin-top:-10px;
   margin-right: 5px;
 }
+.closeBar{
+  
+  background: #7b1fa2;
+  display:flex;
+  .closeIcon{
+    margin-left: auto;
+    cursor: pointer;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: normal;
+    color: white;
+  }
+}
 .yelp-info{
     padding:10px;
     * {

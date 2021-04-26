@@ -22,5 +22,5 @@
     </div>
   </div>
     <app-google-maps (loadingDone)="loadingDone($event)"[center]="center" [listOfResults] = "listOfResults" (centerChangedEvent)="centerChangedEvent($event)" (infoWindowOpened)="infoWindowOpened($event)" flex='70' class="map-view"></app-google-maps>
-    <app-detail-container [hidden]="!isClicked"  class="detail-view" [placesAPI]="placesAPI"></app-detail-container>
+    <app-detail-container [hidden]="!isClicked"  class="detail-view" [placesAPI]="placesAPI" (closeDetail)="closePane()"></app-detail-container>
 </div>

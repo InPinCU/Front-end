@@ -145,4 +145,7 @@ export class MapComponent implements AfterContentInit {
     this.isLoaderVisible = false;
 
   }
+  closePane(){
+    this.isClicked = false;
+  }
 }

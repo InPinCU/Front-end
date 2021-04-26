@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, SimpleChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit,Input, SimpleChanges, SimpleChange, Output, EventEmitter } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ApiCallerService } from 'src/app/services/api-caller.service';
@@ -25,6 +25,7 @@ export class DetailContainerComponent implements OnInit {
   
   color: ThemePalette = 'accent';
   mode: ProgressSpinnerMode = 'determinate';
+  @Output() closeDetail = new EventEmitter<any>();
 
   constructor(private APICaller:ApiCallerService) { }
 
@@ -36,6 +37,9 @@ export class DetailContainerComponent implements OnInit {
     if(currentItem.currentValue){
       this.callDetailsFunction();
     }
+  }
+  closeClick(){
+    this.closeDetail.emit();
   }
   callDetailsFunction(){
     console.log("============");

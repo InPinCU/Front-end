@@ -26,5 +26,5 @@
           </table>
     </div>
     <app-map-location class="map-view" [placesAPI]="placesAPI" [center]="center" [hidden]="!isClicked"></app-map-location>
-    <app-detail-container [hidden]="!isClicked"  class="detail-view" [placesAPI]="placesAPI"></app-detail-container>
+    <app-detail-container [hidden]="!isClicked"  class="detail-view" [placesAPI]="placesAPI"  (closeDetail)="closePane()"></app-detail-container>
 </div>

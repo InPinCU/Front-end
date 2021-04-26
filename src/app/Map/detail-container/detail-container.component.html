@@ -1,6 +1,11 @@
 
 <div matRipple [matRippleColor]="myColor" >
     <div >
+        <div class="closeBar" >
+                <div class="closeIcon" (click)="closeClick()">
+                        <span >Close</span><i class="fa fa-times" aria-hidden="true"></i>	
+                </div>
+        </div>
         <div *ngIf="placesAPI" class="topBar" >
             <p class="nameText"> 
                 {{placesAPI["name"] }}

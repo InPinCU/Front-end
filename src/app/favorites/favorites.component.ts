@@ -44,4 +44,7 @@ export class FavoritesComponent implements OnInit {
     this.placesAPI = {name: element.name, score: element.trendingScore, placesAPIRef: element.placesAPIRef};
     this.center = {lat:Number(element.lat),lng:Number(element.long)};
   }
+  closePane(){
+    this.isClicked = false;
+  }
 }
