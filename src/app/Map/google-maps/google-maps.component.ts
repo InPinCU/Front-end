@@ -115,7 +115,6 @@ export class GoogleMapsComponent implements OnChanges {
         placesScore:row["trendingScore"]
       })
     }
-
     this.loadingDone.emit();
 
   }
@@ -133,20 +132,38 @@ export class GoogleMapsComponent implements OnChanges {
   }
 
   ngOnInit(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      }
+    if(navigator.geolocation){
 
-      let finalOutput = {
-        lat: this.center.lat,
-        lng: this.center.lng,
-        reset:true
-      }
-      this.centerChangedEvent.emit(finalOutput);
-    }, failure => {
-      
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }
+  
+        let finalOutput = {
+          lat: this.center.lat,
+          lng: this.center.lng,
+          reset:true
+        }
+        this.centerChangedEvent.emit(finalOutput);
+      }, failure => {
+        
+        this.center = {
+          lat: GeneralConstants.defaultLat,
+          lng: GeneralConstants.defaultLong,
+        }
+        let finalOutput = {
+          lat: this.center.lat,
+          lng: this.center.lng,
+          reset:true
+        }
+        this.centerChangedEvent.emit(finalOutput);
+        if (failure.message.startsWith("Only secure origins are allowed")) {
+          // Secure Origin issue.
+        }
+      },{timeout:3000})
+    }else{
+
       this.center = {
         lat: GeneralConstants.defaultLat,
         lng: GeneralConstants.defaultLong,
@@ -157,11 +174,7 @@ export class GoogleMapsComponent implements OnChanges {
         reset:true
       }
       this.centerChangedEvent.emit(finalOutput);
-
-      if (failure.message.startsWith("Only secure origins are allowed")) {
-        // Secure Origin issue.
-      }
-    })
+    }
   }
 
   getCenter(event:any){

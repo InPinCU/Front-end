@@ -17,6 +17,9 @@
 }
 .type-list{
     padding-left: 10px;
+    height: 10vh;
+    overflow-y: scroll;
+    flex: 30;
 }
 .search-inside{
     float:left;

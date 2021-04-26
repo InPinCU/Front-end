@@ -112,6 +112,7 @@ export class MapComponent implements AfterContentInit {
       let arr = element["types"].split("|");
       return selectedTypes.some(r=> arr.includes(r));
     })
+    this.count = this.listOfResults.length;
     console.log(this.listOfResults);
   }
   allfilterClicked(){
@@ -123,6 +124,7 @@ export class MapComponent implements AfterContentInit {
       this.listOfResults = this.allListOfResults;
     else
       this.listOfResults = [];
+    this.count = this.listOfResults.length;
     console.log(this.listOfResults);
   }
   infoWindowOpened(marker:any){

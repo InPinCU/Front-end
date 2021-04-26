@@ -48,7 +48,7 @@ export class DetailContainerComponent implements OnInit {
     this.loading = true;
     this.score = this.placesAPI.score;
     this.scoreNum = this.placesAPI.score;
-    this.APICaller.sendLocationDetailsRequest(this.placesAPI["placesAPIRef"]  ?? "",this.userData.attributes.email).subscribe((data: any)=>{
+    this.APICaller.sendLocationDetailsRequest(this.placesAPI["placesAPIRef"]  ?? "",this.userData?.attributes?.email ?? "").subscribe((data: any)=>{
       this.loading = false;
       console.log(data["results"])
       if ("yelp" in data["results"]){
