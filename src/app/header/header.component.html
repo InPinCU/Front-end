@@ -18,7 +18,7 @@
       </div>
       <div class="login-buttons">
 
-        <button mat-raised-button style="background-color: #d682f5;" (click)="callSignIn()" *ngIf="!this.user">Login</button>
+        <button mat-raised-button style="background-color: #a83ecf;" (click)="callSignIn()" *ngIf="!this.user">Login</button>
         <div *ngIf="this.user" class="logout-container">
           <div class="user-name">{{this.user.attributes.name}}</div>
           <a mat-button (click)="callSignOut()"> <img src="./../../assets/logout.svg" class="map-icon"> </a>

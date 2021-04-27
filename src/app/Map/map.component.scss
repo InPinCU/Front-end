@@ -1,16 +1,17 @@
 .map-view{
-    height:70vh;
-    flex:70;
+    height:75vh;
+    flex:55;
 }
 .detail-view{
-    flex:30;
+    flex:45;
+    max-width: 45vw;
     background: #fafafa;
 }
 .container-view{
     display:flex;
 }
 .search-container{
-    padding:10px;
+    padding:10px 32px;
     display: flex;
     flex-direction: row;
     background: #7b1fa2;
@@ -23,7 +24,7 @@
     background: #7b1fa2;
 }
 .type-list{
-    padding-left: 10px;
+    padding-left: 32px;
     height: 10vh;
     overflow-y: scroll;
     flex: 30;
@@ -51,7 +52,7 @@
 
 .number-found{
     font: 500 16px/32px Roboto, "Helvetica Neue", sans-serif;
-    margin-left: 10px;
+    margin-left: 32px;
     color: #f5f5f5;
 }
 .redo-button{

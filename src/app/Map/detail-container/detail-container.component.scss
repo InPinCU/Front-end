@@ -7,6 +7,31 @@
   margin-top:-10px;
   margin-right: 5px;
 }
+
+.spinner-detail{
+  margin-right:12px;
+  .spinner-text{
+    margin-bottom: -50px;
+    margin-left: 25px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: normal;
+    color:white;
+  }
+  ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #ff7f3b;
+  }
+  
+}
+.nameText{
+  margin-top: -30px;
+  font-size: 16px;
+}
+.price{
+  color: #85bf4b;
+  font-size: 18px;
+}
 .closeBar{
   
   background: #7b1fa2;
@@ -21,7 +46,6 @@
   }
 }
 .yelp-info{
-    padding:10px;
     * {
         box-sizing: border-box;
       }
@@ -34,7 +58,7 @@
       
       
       .checked {
-        color: orange;
+        color: #ffe652;
       }
       
       /* Three column layout */
@@ -87,7 +111,4 @@
           display: none;
         }
       }
-}
-.insta-container{
-  max-width: 30vw;
 }

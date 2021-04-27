@@ -22,8 +22,9 @@ export class DetailContainerComponent implements OnInit {
   instaInfo?:any;
   isFavorite?:boolean;
   instaInfoArr:any[]=[];
+  price?:string;
   
-  color: ThemePalette = 'accent';
+  color: ThemePalette = 'warn';
   mode: ProgressSpinnerMode = 'determinate';
   @Output() closeDetail = new EventEmitter<any>();
 
@@ -53,10 +54,12 @@ export class DetailContainerComponent implements OnInit {
       console.log(data["results"])
       if ("yelp" in data["results"]){
         this.rating = data["results"]["yelp"]["yelp_info"].rating;
+        this.price = data["results"]["yelp"]["yelp_info"].price;
         this.yelpInfo = data["results"]["yelp"]["yelp_info"];
       }else{
         this.rating = undefined;
         this.yelpInfo = undefined;
+        this.price = undefined;
       }
       if ("favorite" in data["results"]){
         this.isFavorite = data["results"]["favorite"]

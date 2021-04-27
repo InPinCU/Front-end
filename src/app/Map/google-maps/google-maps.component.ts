@@ -14,7 +14,7 @@ export class GoogleMapsComponent implements OnChanges {
   
   @ViewChild('googlemaps') map!: any;
   width = "100%"
-  height = "70vh"
+  height = "100%"
   isInfoWindowOpen:boolean = false;
 
   @Output() centerChangedEvent = new EventEmitter<any>();

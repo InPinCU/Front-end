@@ -7,34 +7,38 @@
                 </div>
         </div>
         <div *ngIf="placesAPI" class="topBar" >
-            <p class="nameText"> 
-                {{placesAPI["name"] }}
-            </p>
-            <div class="favorite-button" *ngIf="!this.loading && this.userData">
-
-                <button mat-raised-button color="accent" (click)="markAsFavorite(true)" *ngIf="!this.isFavorite">Remember</button>
-                <button mat-raised-button color="warn" (click)="markAsFavorite(false)" *ngIf="this.isFavorite">Forget</button>
-            </div>
-            <div class="spinner">
+            <div class="spinner-detail">
                 <div class="spinner-text">{{scoreNum.toLocaleString().split('.')[0]}} %</div>
-                <mat-progress-spinner  [color]="color" [mode]="mode" [value]="score" [diameter]="50">
+                <mat-progress-spinner  [color]="color" [mode]="mode" [value]="score" [diameter]="80">
                 </mat-progress-spinner>
             </div>
-        </div>
-        <div *ngIf="loading">
-            <img src="../../../assets/load.gif" class="loader-image">
-        </div>
-        <div *ngIf="!loading">
+            
+            <div class="nameText"> 
+                <p>{{placesAPI["name"] }}</p>
             <div class="yelp-info" *ngIf="yelpInfo ">
                 <div *ngIf="rating ">
-                    <span class="heading">User Rating</span>
                     <span class="fa fa-star " [ngClass]="this!.rating >=1 ? 'checked':''"></span>
                     <span class="fa fa-star " [ngClass]="this!.rating >=2 ? 'checked':''"></span>
                     <span class="fa fa-star " [ngClass]="this!.rating >=3 ? 'checked':''"></span>
                     <span class="fa fa-star " [ngClass]="this!.rating >=4 ? 'checked':''"></span>
                     <span class="fa fa-star" [ngClass]="this!.rating >=5 ? 'checked':''"></span>
                 </div>
+                <div *ngIf="price " class="price">
+                    {{price}}
+                </div>
             </div>
+                
+        </div>
+            <div class="favorite-button" *ngIf="!this.loading && this.userData">
+
+                <a (click)="markAsFavorite(true)" *ngIf="!this.isFavorite"><img src="./../../assets/heart.svg" class="map-icon" style="height:25px;"> </a>
+                <a (click)="markAsFavorite(false)" *ngIf="this.isFavorite"><img src="./../../assets/heart-filled.svg" class="map-icon" style="height:25px;"></a>
+            </div>
+        </div>
+        <div *ngIf="loading">
+            <img src="../../../assets/load.gif" class="loader-image">
+        </div>
+        <div *ngIf="!loading">
 
 
             <div *ngIf="instaInfo" class="insta-container">
