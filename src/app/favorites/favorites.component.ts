@@ -32,6 +32,11 @@ export class FavoritesComponent implements OnInit {
       console.log(data["results"]);
 
       this.dataSource = data["results"];
+      if (this.dataSource.length >0){
+        let element = this.dataSource[0];
+        this.placesAPI = {name: element.name, score: element.trendingScore, placesAPIRef: element.placesAPIRef};
+        this.center = {lat:Number(element.lat),lng:Number(element.long)};
+      }
       this.ref.detectChanges();
     })
   }
@@ -46,5 +51,20 @@ export class FavoritesComponent implements OnInit {
   }
   closePane(){
     this.isClicked = false;
+  }
+  infoWindowOpened(element:any){
+    if(this.isClicked == false){
+      this.isClicked = true;
+      this.placesAPI = {name: element.name, score: element.trendingScore, placesAPIRef: element.placesAPIRef};
+      this.center = {lat:Number(element.position.lat),lng:Number(element.position.lng)};
+    }else{
+      if(this.placesAPI.placesAPIRef == element.placesAPIRef){
+        this.isClicked = false;
+      }else{
+        this.placesAPI = {name: element.name, score: element.trendingScore, placesAPIRef: element.placesAPIRef};
+        this.center = {lat:Number(element.position.lat),lng:Number(element.position.lng)};
+
+      }
+    }
   }
 }

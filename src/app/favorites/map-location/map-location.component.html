@@ -13,4 +13,15 @@
 >
 </map-marker>
 
+<map-marker
+  *ngFor="let marker of markers"
+  [position]="marker.position"
+  [label]="marker.label"
+  [title]="marker.title"
+  [options]="marker.options"
+  (mapClick)="openInfo(marker)"
+>
+</map-marker>
+
+
 </google-map>

@@ -15,16 +15,20 @@ export class MapLocationComponent implements OnInit {
 
   @Input()
   placesAPI?: any;
+  @Input()
+  markerData: any[] =[];
+  @Input()
+  center!: google.maps.LatLngLiteral;
   
   @ViewChild('googlemaps') map!: any;
   width = "100%"
   height = "100%"
+  @Output() infoWindowOpened = new EventEmitter<any>();
   
   centerMarkers:any[] = []
+  markers:any[] = []
 
 
-  @Input()
-  center!: google.maps.LatLngLiteral;
 
   options: google.maps.MapOptions = {
     mapTypeControl: false,
@@ -56,6 +60,12 @@ export class MapLocationComponent implements OnInit {
       if(newCenter.currentValue)
         this.setupcenterMarker();
     }
+    
+    const currentItem: SimpleChange = changes.markerData;
+    if(currentItem){
+      if(currentItem.currentValue)
+        this.setupOtherMarkers();
+    }
   }
   
   setupcenterMarker(){
@@ -70,9 +80,33 @@ export class MapLocationComponent implements OnInit {
       options: { draggable: false },
     }]
   }
+  
+  setupOtherMarkers(){
+    this.markers =[];
+    let i = 0;
+    for (let element of this.markerData){
+      i = i + 1;
+      this.markers.push({
+        position: {lat:Number(element.lat),lng:Number(element.long)},
+        label: {
+          color: 'black',
+          text: element.name,
+        },
+        index:0,
+        title: 'Current Location',
+        options: { draggable: false },
+        placesAPIRef:element["placesAPIRef"],
+        name:element["name"],
+        trendingScore:element["trendingScore"]
+      })
+    }
+  }
 
   ngOnInit(): void {
     this.setupcenterMarker();
+  }
+  openInfo(marker:any){
+    this.infoWindowOpened.emit(marker);
   }
 
 

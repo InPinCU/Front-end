@@ -1,5 +1,4 @@
 <div class="not-logged-in" *ngIf="!userData">Kindly login to see favorites</div>
-<div class="not-logged-in" *ngIf="userData">Click on a favorite to view more details</div>
 <div *ngIf="userData"  class="fav-container">
     <div  class="fav-list">
         
@@ -8,16 +7,23 @@
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef class="topBar headerText">
                 <p class="nameText"> 
-                    Your Favorites
+                    Places you marked "to visit"
                 </p> </th>
               <td mat-cell *matCellDef="let element" class="rowData" (click)="showLocation(element)"> 
-                  {{element.name}} 
-
-                  <div class="spinner">
-                    <div class="spinner-text">{{element.trendingScore.toLocaleString().split('.')[0]}} %</div>
-                    <mat-progress-spinner  [color]="color" [mode]="mode" [value]="element.trendingScore" [diameter]="50">
-                    </mat-progress-spinner>
+                <div class="spinner">
+                  <div class="spinner-text">{{element.trendingScore.toLocaleString().split('.')[0]}}</div>
+                  <mat-progress-spinner  [color]="color" [mode]="mode" [value]="element.trendingScore" [diameter]="80">
+                  </mat-progress-spinner>
+              </div>
+              <div class="fav-text">
+                {{element.name}} 
+                <div >
+                  {{element.type}} 
+  
                 </div>
+
+              </div>
+
               </td>
             </ng-container>          
           
@@ -25,6 +31,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
     </div>
-    <app-map-location class="map-view" [placesAPI]="placesAPI" [center]="center" [hidden]="!isClicked"></app-map-location>
+    <app-map-location [class]="isClicked ? 'map-view-unclick' :'map-view' " [placesAPI]="placesAPI" [markerData]="dataSource"  [center]="center" (infoWindowOpened)="infoWindowOpened($event)" ></app-map-location>
     <app-detail-container [hidden]="!isClicked"  class="detail-view" [placesAPI]="placesAPI"  (closeDetail)="closePane()"></app-detail-container>
 </div>
