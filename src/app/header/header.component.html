@@ -14,11 +14,11 @@
       </a>
       <span class="menu-spacer"></span>
       <div>
-        <a mat-button [routerLink]="'/favorite'"  matTooltip="View Favorites"> <img src="./../../assets/playlist.svg" class="map-icon"> </a>
+        <a mat-button [routerLink]="'/favorite'"  matTooltip="View Favorites"> <img src="./../../assets/playlist.svg" class="map-icon" style="height:25px;"> </a>
       </div>
       <div class="login-buttons">
 
-        <button mat-raised-button color="accent" (click)="callSignIn()" *ngIf="!this.user">Login</button>
+        <button mat-raised-button style="background-color: #d682f5;" (click)="callSignIn()" *ngIf="!this.user">Login</button>
         <div *ngIf="this.user" class="logout-container">
           <div class="user-name">{{this.user.attributes.name}}</div>
           <a mat-button (click)="callSignOut()"> <img src="./../../assets/logout.svg" class="map-icon"> </a>

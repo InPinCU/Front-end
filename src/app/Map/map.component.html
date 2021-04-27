@@ -1,7 +1,7 @@
 <div layout="column" class="search-container">
   <mat-form-field flex="33" class="search-inside" >
     <mat-label style="color:#fafafa">Where to?</mat-label>
-    <input matInput type="text" #searchBar >
+    <input matInput type="text" #searchBar style="color:#fafafa">
   </mat-form-field>
 
   <div *ngIf="showRedoSearchButton" flex="20" class="redo-button" (click)="redoSearch()">
@@ -17,7 +17,7 @@
  
 </div> 
 <div class="result-container "> 
-  <div class="number-found" *ngIf="count">Found {{count}} trending places around you that match your mood !!</div>
+  <div class="number-found" *ngIf="count">Found {{count}} trending places around you that match your mood</div>
 </div>
 <div class="container-view">
 
