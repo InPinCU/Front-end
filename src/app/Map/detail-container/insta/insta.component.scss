@@ -10,10 +10,15 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
 
 /* Base Styles */
 .insta-info{
+    
+    background-color: #b2b2b2;
     .insta-posts{
-        max-height: 60vh;
+        max-height: 70vh;
         overflow-y: auto;
-
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0 0% 0 2.5%;
     }
     
 :root {
@@ -68,10 +73,12 @@ img {
  *  STYLE 2
  */
  .caption{
-    text-align: center;
     color: #555;
-    background-color: #F5F5F5;
+    background-color: #fff;
     word-wrap: break-word;
+    height:50px;
+    overflow-y: auto;
+    padding-top:10px;
  }
  .scroll-style-2::-webkit-scrollbar-track
  {
@@ -81,7 +88,7 @@ img {
  
  .scroll-style-2::-webkit-scrollbar
  {
-    width: 12px;
+    width: 6px;
     background-color: #F5F5F5;
  }
  
@@ -97,13 +104,18 @@ img {
     margin: -1rem -1rem;
     padding-bottom: 3rem;
 }
-
+.gallery-level{
+    
+    max-width: 47.5%;
+    height:350px;
+}
 .gallery-item {
     position: relative;
     flex: 1 0 22rem;
     margin: 1rem;
     color: #fff;
     cursor: pointer;
+    height:300px;
 }
 
 .gallery-item:hover .gallery-item-info,
