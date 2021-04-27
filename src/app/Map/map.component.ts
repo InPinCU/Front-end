@@ -1,6 +1,7 @@
 import { AfterContentInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiCallerService } from '../services/api-caller.service';
 import { GeneralConstants } from '../constants/generalConstants';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-map',
@@ -9,6 +10,7 @@ import { GeneralConstants } from '../constants/generalConstants';
 })
 export class MapComponent implements AfterContentInit {
 
+  filteredTypes = new FormControl();
   types:any[] = [];
   count?:number;
   showRedoSearchButton?:boolean;
@@ -22,7 +24,7 @@ export class MapComponent implements AfterContentInit {
   placesAPI?:any;
   score?:number;
   resetSearch:boolean = true;
-  allSelected:boolean = true;
+  allSelected:boolean = false;
   @ViewChild('searchBar',{static: true}) searchBar?: ElementRef;
   
   center: google.maps.LatLngLiteral={lat:this.currentLat,lng:this.currentLong};
@@ -31,6 +33,9 @@ export class MapComponent implements AfterContentInit {
   }
 
   ngAfterContentInit(){
+    this.filteredTypes.valueChanges.subscribe(x => {
+      this.filterValueChanged(x);
+    })
     const options = {
       componentRestrictions: { country: "us" },
       fields: ["address_components", "geometry", "icon", "name"],
@@ -50,6 +55,34 @@ export class MapComponent implements AfterContentInit {
       this.redoSearch();
     })
   }
+  
+  filterValueChanged(selectedTypes:any[]){
+    console.log(selectedTypes);
+    if(selectedTypes.length == 0){
+      this.listOfResults = this.allListOfResults;
+      this.allSelected = false;
+    }
+    else if(selectedTypes.includes("all") && !this.allSelected){
+      this.listOfResults = this.allListOfResults;
+      if(selectedTypes.length != 1){
+        this.filteredTypes.setValue(["all"])
+      }else{
+        this.allSelected = true;
+      }
+    }else{
+      this.listOfResults = this.allListOfResults.filter((element: any) =>{
+        let arr = element["types"].split("|");
+        return selectedTypes.some(r=> arr.includes(r));
+      })
+      if(selectedTypes.includes("all")){
+        let values = this.filteredTypes.value.filter((e: string) => e!="all")
+        this.filteredTypes.setValue(values)
+        this.allSelected = false;
+      }
+
+    }
+    this.count = this.listOfResults.length;
+  }
   searchPerformed(place:any){
     console.log(place);
   }
@@ -66,6 +99,7 @@ export class MapComponent implements AfterContentInit {
     }
   }
   redoSearch(){
+    console.log(this.filteredTypes.value);
     this.center = {lat:this.currentLat,lng:this.currentLong};
     this.isClicked = false;
     this.clickedLocation = undefined;
@@ -78,7 +112,6 @@ export class MapComponent implements AfterContentInit {
       console.log(data["results"])
       this.types=[];
       this.listOfResults=[];
-      this.allSelected = true;
 
       this.isLoaderVisible = false;
 

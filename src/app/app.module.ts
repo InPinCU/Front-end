@@ -27,6 +27,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import Amplify from '@aws-amplify/core';
 import { Auth } from 'aws-amplify';
 import { environment} from 'src/environments/environment';
@@ -110,7 +112,10 @@ const currentConfig = Auth.configure();
     MatChipsModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
