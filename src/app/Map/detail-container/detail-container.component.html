@@ -8,7 +8,7 @@
         </div>
         <div *ngIf="placesAPI" class="topBar" >
             <div class="spinner-detail">
-                <div class="spinner-text">{{scoreNum.toLocaleString().split('.')[0]}} %</div>
+                <div class="spinner-text">{{scoreNum.toLocaleString().split('.')[0]}}</div>
                 <mat-progress-spinner  [color]="color" [mode]="mode" [value]="score" [diameter]="80">
                 </mat-progress-spinner>
             </div>

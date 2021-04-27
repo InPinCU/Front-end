@@ -12,9 +12,9 @@
   margin-right:12px;
   .spinner-text{
     margin-bottom: -50px;
-    margin-left: 25px;
+    margin-left: 30px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
     letter-spacing: normal;
     color:white;
@@ -27,6 +27,9 @@
 .nameText{
   margin-top: -30px;
   font-size: 16px;
+  p{
+    margin-bottom: 5px;
+  }
 }
 .price{
   color: #85bf4b;
@@ -34,7 +37,7 @@
 }
 .closeBar{
   
-  background: #7b1fa2;
+  background: #a83ecf;
   display:flex;
   .closeIcon{
     cursor: pointer;
@@ -49,7 +52,10 @@
     * {
         box-sizing: border-box;
       }
-      
+      div{
+        
+        margin-bottom: 5px;
+      }
       
       .heading {
         //font-size: 25px;
